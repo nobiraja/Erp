@@ -46,10 +46,10 @@ Create a dynamic school website homepage with sections like Header, Image Carous
 Create a Login Page for a school management system with fields for Username/Email and Password, including validation, 'Remember Me', and 'Forgot Password' options. Implement role-based redirection so Admin, Teacher, Cashier, Student, and Parent each land on their respective dashboards after login. Use MySQL with PHP for backend authentication, hashed passwords for security, and AJAX with API for smooth login without page reloads. The design should be responsive and styled using Tailwind + Bootstrap, with dynamic error and success messages.
 
 #### Header Navigation Requirements
-Design a modern admin panel header for a school management system. The header must include the school logo, navigation menu for Dashboard, Students, Teachers, Classes, Attendance, Exams, Fees, Events, Gallery, and Settings. On the right side, show an Admin profile dropdown with Profile, Change Password, and Logout options. Each module page should have its own header with the module title, breadcrumb navigation, a search bar, and quick action buttons (like Add, Edit, Export). The design should be responsive, using Tailwind + Bootstrap styles, with dynamic data managed by MySQL and editable from the Admin Panel.
+Design a modern admin panel header for a school management system with a hamburger menu on the left side for mobile navigation. The header must include the school logo, navigation menu for Dashboard, Students, Teachers, Classes, Attendance, Exams, Fees, Events, Gallery, and Settings. On the right side, show an Admin profile dropdown with Profile, Change Password, and Logout options. Each module page should have its own header with the module title, breadcrumb navigation, a search bar, and quick action buttons (like Add, Edit, Export). The design should be responsive, using Tailwind + Bootstrap styles, with dynamic data managed by MySQL and editable from the Admin Panel. On mobile devices, the navigation should collapse behind a hamburger menu that slides in from the left.
 
 #### Sidebar Menu Requirements
-Create a responsive admin panel menu for a school management system. The menu should be a collapsible sidebar with icons and text. It must include links for Dashboard, Students, Teachers, Classes & Subjects, Attendance, Exams & Results, Fees, Events, Gallery, Reports, and Settings. Each item should have submenus where required. The active page should be highlighted. Menu data (titles, icons, links, visibility) should be stored in a MySQL database and controlled by the Admin Panel with role-based permissions. On mobile view, the menu should collapse into a drawer. At the bottom, include an Admin user profile section with Profile, Change Password, and Logout options.
+Create a responsive admin panel menu for a school management system with a hamburger menu toggle on the left side. The menu should be a collapsible sidebar with icons and text. It must include links for Dashboard, Students, Teachers, Classes & Subjects, Attendance, Exams & Results, Fees, Events, Gallery, Reports, and Settings. Each item should have submenus where required. The active page should be highlighted. Menu data (titles, icons, links, visibility) should be stored in a MySQL database and controlled by the Admin Panel with role-based permissions. On mobile view, the menu should collapse into a drawer with smooth slide-in animation. At the bottom, include an Admin user profile section with Profile, Change Password, and Logout options. The hamburger menu icon should transform into an X when the sidebar is expanded.
 
 ### 🔐 Security & Authentication
 
@@ -471,8 +471,20 @@ school-management/
 │   │   ├── TeacherController.php
 │   │   ├── StudentController.php
 │   │   ├── CashierController.php
+│   │   ├── ParentController.php
 │   │   ├── AuthController.php
-│   │   └── ApiController.php
+│   │   ├── ApiController.php
+│   │   ├── DashboardController.php
+│   │   ├── StudentsController.php
+│   │   ├── TeachersController.php
+│   │   ├── ClassesController.php
+│   │   ├── AttendanceController.php
+│   │   ├── ExamsController.php
+│   │   ├── FeesController.php
+│   │   ├── EventsController.php
+│   │   ├── GalleryController.php
+│   │   ├── ReportsController.php
+│   │   └── SettingsController.php
 │   ├── core/           # Framework foundation
 │   │   ├── Database.php     # Database abstraction
 │   │   ├── Router.php        # URL routing
@@ -502,11 +514,178 @@ school-management/
 │
 ├── 🌐 Public Interface
 │   ├── admin/            # Admin interface
+│   │   ├── dashboard/    # Admin dashboard
+│   │   │   ├── index.php
+│   │   │   ├── stats.php
+│   │   │   ├── notifications.php
+│   │   │   └── analytics.php
+│   │   ├── students/     # Student management
+│   │   │   ├── index.php
+│   │   │   ├── add.php
+│   │   │   ├── edit.php
+│   │   │   ├── view.php
+│   │   │   ├── bulk_import.php
+│   │   │   ├── export.php
+│   │   │   └── promotion.php
+│   │   ├── teachers/     # Teacher management
+│   │   │   ├── index.php
+│   │   │   ├── add.php
+│   │   │   ├── edit.php
+│   │   │   ├── view.php
+│   │   │   ├── assign_subjects.php
+│   │   │   └── performance.php
+│   │   ├── classes/      # Classes & subjects
+│   │   │   ├── index.php
+│   │   │   ├── add.php
+│   │   │   ├── edit.php
+│   │   │   ├── subjects.php
+│   │   │   └── timetable.php
+│   │   ├── attendance/   # Attendance management
+│   │   │   ├── index.php
+│   │   │   ├── mark.php
+│   │   │   ├── report.php
+│   │   │   ├── bulk_upload.php
+│   │   │   └── analytics.php
+│   │   ├── exams/        # Exams & results
+│   │   │   ├── index.php
+│   │   │   ├── add.php
+│   │   │   ├── results.php
+│   │   │   ├── schedule.php
+│   │   │   ├── admit_cards.php
+│   │   │   └── marksheets.php
+│   │   ├── fees/         # Fee management
+│   │   │   ├── index.php
+│   │   │   ├── collect.php
+│   │   │   ├── structure.php
+│   │   │   ├── outstanding.php
+│   │   │   └── reports.php
+│   │   ├── events/       # Events & announcements
+│   │   │   ├── index.php
+│   │   │   ├── add.php
+│   │   │   ├── edit.php
+│   │   │   └── calendar.php
+│   │   ├── gallery/      # Gallery management
+│   │   │   ├── index.php
+│   │   │   ├── upload.php
+│   │   │   ├── categories.php
+│   │   │   └── manage.php
+│   │   ├── reports/      # Reports
+│   │   │   ├── index.php
+│   │   │   ├── generate.php
+│   │   │   ├── export.php
+│   │   │   └── analytics.php
+│   │   └── settings/     # System settings
+│   │       ├── index.php
+│   │       ├── users.php
+│   │       ├── permissions.php
+│   │       ├── school_info.php
+│   │       └── backup.php
 │   ├── teacher/          # Teacher portal
+│   │   ├── dashboard/    # Teacher dashboard
+│   │   │   ├── index.php
+│   │   │   ├── stats.php
+│   │   │   └── announcements.php
+│   │   ├── attendance/   # Attendance marking
+│   │   │   ├── index.php
+│   │   │   ├── mark.php
+│   │   │   ├── report.php
+│   │   │   └── history.php
+│   │   ├── classes/      # Class management
+│   │   │   ├── index.php
+│   │   │   ├── subjects.php
+│   │   │   ├── students.php
+│   │   │   └── assignments.php
+│   │   ├── exams/        # Exam management
+│   │   │   ├── index.php
+│   │   │   ├── marks.php
+│   │   │   ├── results.php
+│   │   │   └── schedule.php
+│   │   └── profile/      # Profile management
+│   │       ├── index.php
+│   │       ├── edit.php
+│   │       └── change_password.php
 │   ├── student/          # Student portal
+│   │   ├── dashboard/    # Student dashboard
+│   │   │   ├── index.php
+│   │   │   └── announcements.php
+│   │   ├── attendance/   # Attendance view
+│   │   │   ├── index.php
+│   │   │   └── history.php
+│   │   ├── results/      # Exam results
+│   │   │   ├── index.php
+│   │   │   ├── details.php
+│   │   │   └── download.php
+│   │   ├── fees/         # Fee status
+│   │   │   ├── index.php
+│   │   │   ├── history.php
+│   │   │   └── pay.php
+│   │   └── profile/      # Profile management
+│   │       ├── index.php
+│   │       ├── edit.php
+│   │       └── change_password.php
 │   ├── cashier/          # Cashier interface
+│   │   ├── dashboard/    # Cashier dashboard
+│   │   │   ├── index.php
+│   │   │   └── summary.php
+│   │   ├── fees/         # Fee collection
+│   │   │   ├── index.php
+│   │   │   ├── collect.php
+│   │   │   └── history.php
+│   │   ├── outstanding/  # Outstanding fees
+│   │   │   ├── index.php
+│   │   │   └── reminders.php
+│   │   ├── reports/      # Financial reports
+│   │   │   ├── index.php
+│   │   │   └── generate.php
+│   │   └── expenses/     # Expense management
+│   │       ├── index.php
+│   │       ├── add.php
+│   │       └── categories.php
 │   ├── parent/           # Parent portal
+│   │   ├── dashboard/    # Parent dashboard
+│   │   │   ├── index.php
+│   │   │   └── notifications.php
+│   │   ├── children/     # Children overview
+│   │   │   ├── index.php
+│   │   │   └── details.php
+│   │   ├── attendance/   # Attendance tracking
+│   │   │   ├── index.php
+│   │   │   └── reports.php
+│   │   ├── results/      # Academic results
+│   │   │   ├── index.php
+│   │   │   └── reports.php
+│   │   ├── fees/         # Fee payments
+│   │   │   ├── index.php
+│   │   │   └── payments.php
+│   │   ├── events/       # School events
+│   │   │   ├── index.php
+│   │   │   └── calendar.php
+│   │   └── profile/      # Profile management
+│   │       ├── index.php
+│   │       ├── edit.php
+│   │       └── change_password.php
 │   └── public/           # Public website
+│       ├── homepage/     # Homepage
+│       │   ├── index.php
+│       │   └── carousel.php
+│       ├── about/        # About page
+│       │   ├── index.php
+│       │   └── faculty.php
+│       ├── courses/      # Courses page
+│       │   ├── index.php
+│       │   └── curriculum.php
+│       ├── events/       # Events page
+│       │   ├── index.php
+│       │   └── calendar.php
+│       ├── gallery/      # Gallery page
+│       │   ├── index.php
+│       │   └── albums.php
+│       ├── contact/      # Contact page
+│       │   ├── index.php
+│       │   └── form.php
+│       └── admission/    # Admission page
+│           ├── index.php
+│           └── requirements.php
 │
 ├── 📱 Assets & Resources
 │   ├── uploads/           # User uploads
@@ -567,7 +746,7 @@ school-management/
 #### Application Core Files
 | Component | Primary Files | Responsibility |
 |-----------|---------------|----------------|
-| **Controllers** | [`AdminController.php`](controllers/AdminController.php), [`TeacherController.php`](controllers/TeacherController.php), [`StudentController.php`](controllers/StudentController.php), [`CashierController.php`](controllers/CashierController.php), [`AuthController.php`](controllers/AuthController.php), [`ApiController.php`](controllers/ApiController.php) | Request handling and business logic |
+| **Controllers** | [`AdminController.php`](controllers/AdminController.php), [`TeacherController.php`](controllers/TeacherController.php), [`StudentController.php`](controllers/StudentController.php), [`CashierController.php`](controllers/CashierController.php), [`ParentController.php`](controllers/ParentController.php), [`AuthController.php`](controllers/AuthController.php), [`ApiController.php`](controllers/ApiController.php), [`DashboardController.php`](controllers/DashboardController.php), [`StudentsController.php`](controllers/StudentsController.php), [`TeachersController.php`](controllers/TeachersController.php), [`ClassesController.php`](controllers/ClassesController.php), [`AttendanceController.php`](controllers/AttendanceController.php), [`ExamsController.php`](controllers/ExamsController.php), [`FeesController.php`](controllers/FeesController.php), [`EventsController.php`](controllers/EventsController.php), [`GalleryController.php`](controllers/GalleryController.php), [`ReportsController.php`](controllers/ReportsController.php), [`SettingsController.php`](controllers/SettingsController.php) | Request handling and business logic |
 | **Models** | [`User.php`](models/User.php), [`Student.php`](models/Student.php), [`Teacher.php`](models/Teacher.php), [`Fee.php`](models/Fee.php), [`Exam.php`](models/Exam.php), [`Attendance.php`](models/Attendance.php) | Data operations and database interaction |
 | **Views** | [`admin/dashboard`](admin/dashboard/), [`admin/students`](admin/students/), [`admin/teachers`](admin/teachers/), [`admin/classes`](admin/classes/), [`admin/attendance`](admin/attendance/), [`admin/exams`](admin/exams/), [`admin/fees`](admin/fees/), [`admin/events`](admin/events/), [`admin/gallery`](admin/gallery/), [`admin/reports`](admin/reports/), [`admin/settings`](admin/settings/), [`teacher/dashboard`](teacher/dashboard/), [`teacher/attendance`](teacher/attendance/), [`teacher/classes`](teacher/classes/), [`teacher/exams`](teacher/exams/), [`teacher/profile`](teacher/profile/), [`student/dashboard`](student/dashboard/), [`student/attendance`](student/attendance/), [`student/results`](student/results/), [`student/fees`](student/fees/), [`student/profile`](student/profile/), [`cashier/dashboard`](cashier/dashboard/), [`cashier/fees`](cashier/fees/), [`cashier/outstanding`](cashier/outstanding/), [`cashier/reports`](cashier/reports/), [`cashier/expenses`](cashier/expenses/), [`parent/dashboard`](parent/dashboard/), [`parent/children`](parent/children/), [`parent/attendance`](parent/attendance/), [`parent/results`](parent/results/), [`parent/fees`](parent/fees/), [`parent/events`](parent/events/), [`parent/profile`](parent/profile/), [`public/homepage`](public/homepage/) | Presentation and user interface |
 | **Core** | [`Database.php`](core/Database.php), [`Router.php`](core/Router.php), [`Security.php`](core/Security.php), [`Session.php`](core/Session.php), [`Validator.php`](core/Validator.php) | Framework foundation |
@@ -624,13 +803,47 @@ school-management/
 - **DataTables**: Advanced table functionality with search/filter
 - **Font Awesome**: Comprehensive icon library
 
+### UI Components & Layout
+
+#### Header Navigation
+- **School Logo**: Prominently displayed on the left side with school name and tagline
+- **Main Navigation Menu**: Responsive navigation bar with links to Home, About, Courses, Events, Gallery, Contact, Admission
+- **User Authentication**: Login/Register buttons for unauthenticated users, user dropdown for authenticated users
+- **Mobile Hamburger Menu**: Collapsible three-line menu icon that expands to show navigation on mobile devices
+- **Search Bar**: Integrated search functionality for quick content access
+- **Breadcrumb Navigation**: Shows current page location within the site hierarchy
+
+#### Sidebar Menu (Admin/Teacher/Student/Cashier/Parent Panels)
+- **Hamburger Menu Toggle**: Left-side hamburger icon to collapse/expand the sidebar
+- **Collapsible Sidebar**: Vertical navigation menu that can be minimized to save screen space
+- **Menu Categories**: Grouped menu items with icons and labels for different modules
+- **Active State Indicators**: Highlighted current page in the navigation
+- **Submenu Support**: Expandable submenus for related functionality
+- **User Profile Section**: Bottom section showing user avatar, name, and role
+- **Quick Actions**: Logout and profile access buttons
+
+#### Footer
+- **School Information**: Contact details, address, phone numbers, email
+- **Quick Links**: Important page links organized in columns
+- **Social Media Links**: Icons linking to school's social media profiles
+- **Copyright Notice**: Copyright information and current year
+- **Newsletter Signup**: Optional email subscription form
+- **Back to Top Button**: Smooth scroll to top functionality
+
+#### Responsive Design Elements
+- **Mobile-First Approach**: Design optimized for mobile devices first, then scaled up
+- **Breakpoint System**: xs (<576px), sm (≥576px), md (≥768px), lg (≥992px), xl (≥1200px)
+- **Hamburger Menu**: Three-line icon that transforms into X when active
+- **Off-Canvas Navigation**: Sidebar slides in from left on mobile devices
+- **Touch-Friendly Elements**: Larger buttons and touch targets for mobile interaction
+
 ### Frontend Functions & Features
 
 #### Core JavaScript Functions
 - **Authentication Functions**: [`loginUser()`](js/modules/auth.js:loginUser), [`logoutUser()`](js/modules/auth.js:logoutUser), [`validateSession()`](js/modules/auth.js:validateSession)
 - **API Communication**: [`apiRequest()`](js/modules/api.js:apiRequest), [`fetchData()`](js/modules/api.js:fetchData), [`submitForm()`](js/modules/api.js:submitForm)
 - **Form Validation**: [`validateForm()`](js/modules/validation.js:validateForm), [`checkRequiredFields()`](js/modules/validation.js:checkRequiredFields), [`showValidationErrors()`](js/modules/validation.js:showValidationErrors)
-- **UI Interactions**: [`toggleSidebar()`](js/custom/app.js:toggleSidebar), [`showModal()`](js/custom/app.js:showModal), [`updateTable()`](js/custom/app.js:updateTable)
+- **UI Interactions**: [`toggleSidebar()`](js/custom/app.js:toggleSidebar), [`showModal()`](js/custom/app.js:showModal), [`updateTable()`](js/custom/app.js:updateTable), [`toggleHamburgerMenu()`](js/custom/navigation.js:toggleHamburgerMenu)
 - **Data Visualization**: [`renderChart()`](js/custom/dashboard.js:renderChart), [`updateDashboardStats()`](js/custom/dashboard.js:updateDashboardStats)
 
 #### Dashboard Functions
@@ -937,20 +1150,64 @@ We welcome contributions from the community! Please follow these guidelines:
 4. **Database Setup**: Import schema and run migrations
 5. **Development Server**: Start local development server
 
-### Important Links & Endpoints
+### URL Routing & Navigation
 
-#### Main Application
-- **Home Page**: [`index.php`](index.php)
-- **Installation**: [`install.php`](install.php)
-- **Admin Dashboard**: `/admin/dashboard`
-- **API Documentation**: `/api/docs`
+#### Public Website URLs
+- **Homepage**: `http://localhost/` (loads [`index.php`](index.php))
+- **Login Page**: `http://localhost/login` (loads [`views/auth/login.php`](views/auth/login.php))
+- **About Page**: `http://localhost/about` (loads [`public/about/index.php`](public/about/index.php))
+- **Courses Page**: `http://localhost/courses` (loads [`public/courses/index.php`](public/courses/index.php))
+- **Events Page**: `http://localhost/events` (loads [`public/events/index.php`](public/events/index.php))
+- **Gallery Page**: `http://localhost/gallery` (loads [`public/gallery/index.php`](public/gallery/index.php))
+- **Contact Page**: `http://localhost/contact` (loads [`public/contact/index.php`](public/contact/index.php))
+- **Admission Page**: `http://localhost/admission` (loads [`public/admission/index.php`](public/admission/index.php))
 
-#### User Dashboards
-- **Admin Portal**: `/admin/`
-- **Teacher Portal**: `/teacher/`
-- **Student Portal**: `/student/`
-- **Cashier Portal**: `/cashier/`
-- **Parent Portal**: `/parent/`
+#### Admin Panel URLs
+- **Admin Dashboard**: `http://localhost/admin/dashboard` (loads [`admin/dashboard/index.php`](admin/dashboard/index.php))
+- **Students Management**: `http://localhost/admin/students` (loads [`admin/students/index.php`](admin/students/index.php))
+- **Teachers Management**: `http://localhost/admin/teachers` (loads [`admin/teachers/index.php`](admin/teachers/index.php))
+- **Classes & Subjects**: `http://localhost/admin/classes` (loads [`admin/classes/index.php`](admin/classes/index.php))
+- **Attendance Management**: `http://localhost/admin/attendance` (loads [`admin/attendance/index.php`](admin/attendance/index.php))
+- **Exams & Results**: `http://localhost/admin/exams` (loads [`admin/exams/index.php`](admin/exams/index.php))
+- **Fees Management**: `http://localhost/admin/fees` (loads [`admin/fees/index.php`](admin/fees/index.php))
+- **Events & Announcements**: `http://localhost/admin/events` (loads [`admin/events/index.php`](admin/events/index.php))
+- **Gallery Management**: `http://localhost/admin/gallery` (loads [`admin/gallery/index.php`](admin/gallery/index.php))
+- **Reports**: `http://localhost/admin/reports` (loads [`admin/reports/index.php`](admin/reports/index.php))
+- **Settings**: `http://localhost/admin/settings` (loads [`admin/settings/index.php`](admin/settings/index.php))
+
+#### Teacher Portal URLs
+- **Teacher Dashboard**: `http://localhost/teacher/dashboard` (loads [`teacher/dashboard/index.php`](teacher/dashboard/index.php))
+- **Attendance Marking**: `http://localhost/teacher/attendance` (loads [`teacher/attendance/index.php`](teacher/attendance/index.php))
+- **Class Management**: `http://localhost/teacher/classes` (loads [`teacher/classes/index.php`](teacher/classes/index.php))
+- **Exam Management**: `http://localhost/teacher/exams` (loads [`teacher/exams/index.php`](teacher/exams/index.php))
+- **Profile Management**: `http://localhost/teacher/profile` (loads [`teacher/profile/index.php`](teacher/profile/index.php))
+
+#### Student Portal URLs
+- **Student Dashboard**: `http://localhost/student/dashboard` (loads [`student/dashboard/index.php`](student/dashboard/index.php))
+- **Attendance View**: `http://localhost/student/attendance` (loads [`student/attendance/index.php`](student/attendance/index.php))
+- **Exam Results**: `http://localhost/student/results` (loads [`student/results/index.php`](student/results/index.php))
+- **Fee Status**: `http://localhost/student/fees` (loads [`student/fees/index.php`](student/fees/index.php))
+- **Profile Management**: `http://localhost/student/profile` (loads [`student/profile/index.php`](student/profile/index.php))
+
+#### Cashier Portal URLs
+- **Cashier Dashboard**: `http://localhost/cashier/dashboard` (loads [`cashier/dashboard/index.php`](cashier/dashboard/index.php))
+- **Fee Collection**: `http://localhost/cashier/fees` (loads [`cashier/fees/index.php`](cashier/fees/index.php))
+- **Outstanding Fees**: `http://localhost/cashier/outstanding` (loads [`cashier/outstanding/index.php`](cashier/outstanding/index.php))
+- **Financial Reports**: `http://localhost/cashier/reports` (loads [`cashier/reports/index.php`](cashier/reports/index.php))
+- **Expense Management**: `http://localhost/cashier/expenses` (loads [`cashier/expenses/index.php`](cashier/expenses/index.php))
+
+#### Parent Portal URLs
+- **Parent Dashboard**: `http://localhost/parent/dashboard` (loads [`parent/dashboard/index.php`](parent/dashboard/index.php))
+- **Children Overview**: `http://localhost/parent/children` (loads [`parent/children/index.php`](parent/children/index.php))
+- **Attendance Tracking**: `http://localhost/parent/attendance` (loads [`parent/attendance/index.php`](parent/attendance/index.php))
+- **Academic Results**: `http://localhost/parent/results` (loads [`parent/results/index.php`](parent/results/index.php))
+- **Fee Payments**: `http://localhost/parent/fees` (loads [`parent/fees/index.php`](parent/fees/index.php))
+- **School Events**: `http://localhost/parent/events` (loads [`parent/events/index.php`](parent/events/index.php))
+- **Profile Management**: `http://localhost/parent/profile` (loads [`parent/profile/index.php`](parent/profile/index.php))
+
+#### System URLs
+- **Installation Wizard**: `http://localhost/install` (loads [`install.php`](install.php))
+- **API Documentation**: `http://localhost/api/docs` (loads [`api/docs/index.php`](api/docs/index.php))
 
 #### API Endpoints
 - **Authentication**: `/api/v1/auth/login`
