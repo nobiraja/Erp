@@ -1,0 +1,88 @@
+<?php
+/**
+ * Email Configuration Example
+ * Copy this file to email.php and update the settings for your environment
+ */
+
+return [
+    // Email Driver
+    'driver' => 'smtp', // smtp, sendmail, mail
+
+    // SMTP Configuration
+    'smtp' => [
+        'host' => 'smtp.gmail.com',
+        'port' => 587,
+        'encryption' => 'tls', // tls, ssl, null
+        'username' => 'your-email@gmail.com',
+        'password' => 'your-app-password',
+        'auth_mode' => 'login' // login, plain, cram-md5
+    ],
+
+    // Sendmail Configuration
+    'sendmail' => [
+        'path' => '/usr/sbin/sendmail -bs -i'
+    ],
+
+    // General Email Settings
+    'from' => [
+        'address' => 'noreply@school.com',
+        'name' => 'School Management System'
+    ],
+
+    // Email Templates
+    'templates' => [
+        'welcome' => 'welcome.html',
+        'password_reset' => 'password_reset.html',
+        'notification' => 'notification.html',
+        'report' => 'report.html'
+    ],
+
+    // Queue Settings
+    'queue' => [
+        'enabled' => false,
+        'driver' => 'database', // database, redis, file
+        'batch_size' => 50,
+        'retry_attempts' => 3,
+        'retry_delay' => 300 // 5 minutes
+    ],
+
+    // Email Validation
+    'validation' => [
+        'verify_dns' => true,
+        'verify_mx' => false,
+        'blacklist_domains' => [], // Array of blocked domains
+        'whitelist_domains' => [] // Array of allowed domains
+    ],
+
+    // Rate Limiting
+    'rate_limit' => [
+        'enabled' => true,
+        'max_per_hour' => 100,
+        'max_per_day' => 1000,
+        'burst_limit' => 10
+    ],
+
+    // Logging
+    'logging' => [
+        'enabled' => true,
+        'level' => 'info', // debug, info, warning, error
+        'log_sent' => true,
+        'log_failed' => true
+    ],
+
+    // Test Mode
+    'test' => [
+        'enabled' => false,
+        'intercept_email' => 'test@example.com', // All emails will be sent here
+        'log_only' => false // Set to true to only log emails without sending
+    ],
+
+    // DKIM Settings (for email authentication)
+    'dkim' => [
+        'enabled' => false,
+        'domain' => 'school.com',
+        'selector' => 'default',
+        'private_key' => '/path/to/dkim/private.key',
+        'passphrase' => ''
+    ]
+];

@@ -1,0 +1,146 @@
+<?php
+/**
+ * File Upload Configuration Example
+ * Copy this file to upload.php and update the settings for your environment
+ */
+
+return [
+    // General Upload Settings
+    'enabled' => true,
+    'max_file_uploads' => 20,
+    'upload_path' => __DIR__ . '/../uploads',
+
+    // File Size Limits
+    'max_file_size' => 10 * 1024 * 1024, // 10MB in bytes
+    'max_post_size' => 50 * 1024 * 1024, // 50MB in bytes
+    'memory_limit' => 128 * 1024 * 1024, // 128MB in bytes
+
+    // PHP Upload Settings (these override php.ini if set)
+    'php_settings' => [
+        'upload_max_filesize' => '10M',
+        'post_max_size' => '50M',
+        'max_execution_time' => 300, // 5 minutes
+        'memory_limit' => '128M'
+    ],
+
+    // Allowed File Types by Category
+    'allowed_types' => [
+        'images' => [
+            'extensions' => ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'],
+            'mime_types' => ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/webp'],
+            'max_size' => 5 * 1024 * 1024 // 5MB
+        ],
+        'documents' => [
+            'extensions' => ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'rtf'],
+            'mime_types' => [
+                'application/pdf',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/vnd.ms-excel',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/vnd.ms-powerpoint',
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                'text/plain',
+                'application/rtf'
+            ],
+            'max_size' => 10 * 1024 * 1024 // 10MB
+        ],
+        'archives' => [
+            'extensions' => ['zip', 'rar', '7z', 'tar', 'gz'],
+            'mime_types' => [
+                'application/zip',
+                'application/x-rar-compressed',
+                'application/x-7z-compressed',
+                'application/x-tar',
+                'application/gzip'
+            ],
+            'max_size' => 50 * 1024 * 1024 // 50MB
+        ],
+        'videos' => [
+            'extensions' => ['mp4', 'avi', 'mov', 'wmv', 'flv', 'webm'],
+            'mime_types' => [
+                'video/mp4',
+                'video/avi',
+                'video/quicktime',
+                'video/x-ms-wmv',
+                'video/x-flv',
+                'video/webm'
+            ],
+            'max_size' => 100 * 1024 * 1024 // 100MB
+        ],
+        'audio' => [
+            'extensions' => ['mp3', 'wav', 'ogg', 'aac', 'wma'],
+            'mime_types' => [
+                'audio/mpeg',
+                'audio/wav',
+                'audio/ogg',
+                'audio/aac',
+                'audio/x-ms-wma'
+            ],
+            'max_size' => 20 * 1024 * 1024 // 20MB
+        ]
+    ],
+
+    // Image-specific Settings
+    'image_settings' => [
+        'resize_enabled' => true,
+        'max_width' => 1920,
+        'max_height' => 1080,
+        'quality' => 85, // JPEG quality 0-100
+        'create_thumbnails' => true,
+        'thumbnail_sizes' => [
+            'small' => ['width' => 150, 'height' => 150],
+            'medium' => ['width' => 300, 'height' => 300],
+            'large' => ['width' => 600, 'height' => 600]
+        ]
+    ],
+
+    // Security Settings
+    'security' => [
+        'scan_for_viruses' => false, // Requires antivirus software
+        'check_mime_type' => true,
+        'randomize_filename' => true,
+        'allowed_chars' => 'a-zA-Z0-9._-',
+        'block_executables' => true,
+        'executable_extensions' => ['exe', 'bat', 'cmd', 'com', 'scr', 'pif', 'jar', 'msi', 'deb', 'rpm']
+    ],
+
+    // Storage Settings
+    'storage' => [
+        'driver' => 'local', // local, s3, ftp
+        'permissions' => 0644,
+        'directory_permissions' => 0755,
+        'organize_by_date' => true,
+        'date_format' => 'Y/m/d'
+    ],
+
+    // Upload Directories
+    'directories' => [
+        'students' => 'students',
+        'teachers' => 'teachers',
+        'documents' => 'documents',
+        'gallery' => 'gallery',
+        'temp' => 'temp',
+        'exports' => 'exports'
+    ],
+
+    // Chunked Upload Settings (for large files)
+    'chunked_upload' => [
+        'enabled' => false,
+        'chunk_size' => 1 * 1024 * 1024, // 1MB chunks
+        'cleanup_temp_files' => true,
+        'temp_lifetime' => 3600 // 1 hour
+    ],
+
+    // Error Messages
+    'error_messages' => [
+        'file_too_large' => 'File size exceeds the maximum allowed limit.',
+        'invalid_type' => 'File type not allowed.',
+        'upload_failed' => 'File upload failed.',
+        'no_file' => 'No file was uploaded.',
+        'partial_upload' => 'File was only partially uploaded.',
+        'missing_temp_dir' => 'Temporary upload directory missing.',
+        'write_failed' => 'Failed to write file to disk.',
+        'extension_blocked' => 'File extension is blocked for security reasons.'
+    ]
+];

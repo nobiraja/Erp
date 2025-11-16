@@ -1,0 +1,78 @@
+<?php
+/**
+ * Application Configuration Example
+ * Copy this file to app.php and update the settings for your environment
+ */
+
+return [
+    // Application Environment
+    'env' => 'development', // development, staging, production
+
+    // Debug Mode
+    'debug' => true, // Set to false in production
+
+    // Application Name
+    'name' => 'School Management System',
+
+    // Application Version
+    'version' => '1.0.0',
+
+    // Base URL
+    'base_url' => 'http://localhost',
+
+    // Timezone
+    'timezone' => 'UTC',
+
+    // Locale
+    'locale' => 'en_US',
+
+    // Session Configuration
+    'session' => [
+        'lifetime' => 7200, // 2 hours
+        'path' => '/',
+        'domain' => '',
+        'secure' => false, // Set to true for HTTPS
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ],
+
+    // Cache Configuration
+    'cache' => [
+        'enabled' => false,
+        'driver' => 'file', // file, redis, memcached
+        'ttl' => 3600, // 1 hour
+        'path' => __DIR__ . '/../cache'
+    ],
+
+    // Logging Configuration
+    'logging' => [
+        'level' => 'debug', // emergency, alert, critical, error, warning, notice, info, debug
+        'path' => __DIR__ . '/../logs',
+        'max_files' => 30,
+        'format' => '[{timestamp}] {level}: {message} {context}'
+    ],
+
+    // File Upload Paths
+    'paths' => [
+        'uploads' => __DIR__ . '/../uploads',
+        'temp' => sys_get_temp_dir(),
+        'logs' => __DIR__ . '/../logs',
+        'cache' => __DIR__ . '/../cache',
+        'exports' => __DIR__ . '/../exports'
+    ],
+
+    // API Configuration
+    'api' => [
+        'enabled' => true,
+        'version' => 'v1',
+        'rate_limit' => 1000, // requests per hour
+        'key_required' => false
+    ],
+
+    // Maintenance Mode
+    'maintenance' => [
+        'enabled' => false,
+        'message' => 'System is under maintenance. Please try again later.',
+        'allowed_ips' => [] // Array of IP addresses allowed during maintenance
+    ]
+];
