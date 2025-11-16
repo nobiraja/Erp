@@ -106,18 +106,21 @@ class HomepageController extends BaseController {
 
     /**
      * Get setting value from database
-     */
-    private function getSetting($key, $default = null) {
-        try {
-            $result = $this->db->fetch(
-                "SELECT setting_value FROM settings WHERE setting_key = ?",
-                [$key]
-            );
-            return $result ? $result['setting_value'] : $default;
-        } catch (Exception $e) {
-            return $default;
-        }
-    }
+      */
+     private function getSetting($key, $default = null) {
+         if (!$this->db) {
+             return $default;
+         }
+         try {
+             $result = $this->db->fetch(
+                 "SELECT setting_value FROM settings WHERE setting_key = ?",
+                 [$key]
+             );
+             return $result ? $result['setting_value'] : $default;
+         } catch (Exception $e) {
+             return $default;
+         }
+     }
 
     /**
      * Get default homepage data when database is not available

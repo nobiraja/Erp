@@ -89,9 +89,7 @@ if (file_exists($routesFile)) {
     require_once $routesFile;
 } else {
     // Default routes if no routes file exists
-    $router->get('/', function() {
-        echo "Welcome to School Management System";
-    });
+    $router->get('/', 'Homepage@index');
 
     $router->get('/login', 'Auth@login');
     $router->post('/login', 'Auth@authenticate');
