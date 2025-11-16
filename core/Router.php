@@ -114,17 +114,7 @@ class Router {
      * Get current request URI
      */
     private function getRequestUri() {
-        $uri = $_SERVER['REQUEST_URI'];
-
-        // Remove query string
-        if (($pos = strpos($uri, '?')) !== false) {
-            $uri = substr($uri, 0, $pos);
-        }
-
-        // Remove base path
-        if ($this->basePath && strpos($uri, $this->basePath) === 0) {
-            $uri = substr($uri, strlen($this->basePath));
-        }
+        $uri = $_GET['page'] ?? '/';
 
         return $this->normalizeRoute($uri);
     }

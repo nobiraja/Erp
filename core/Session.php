@@ -34,22 +34,25 @@ class Session {
      * Configure session settings
      */
     private function configureSession() {
-        // Set secure session configuration
-        ini_set('session.use_only_cookies', 1);
-        ini_set('session.use_strict_mode', 1);
-        ini_set('session.cookie_httponly', 1);
-        ini_set('session.cookie_secure', $this->security->isHTTPS());
-        ini_set('session.gc_maxlifetime', $this->sessionLifetime);
+        // Only configure if session is not already active
+        if (session_status() === PHP_SESSION_NONE) {
+            // Set secure session configuration
+            ini_set('session.use_only_cookies', 1);
+            ini_set('session.use_strict_mode', 1);
+            ini_set('session.cookie_httponly', 1);
+            ini_set('session.cookie_secure', $this->security->isHTTPS());
+            ini_set('session.gc_maxlifetime', $this->sessionLifetime);
 
-        // Set session cookie parameters
-        session_set_cookie_params([
-            'lifetime' => $this->sessionLifetime,
-            'path' => '/',
-            'domain' => $_SERVER['HTTP_HOST'] ?? '',
-            'secure' => $this->security->isHTTPS(),
-            'httponly' => true,
-            'samesite' => 'Strict'
-        ]);
+            // Set session cookie parameters
+            session_set_cookie_params([
+                'lifetime' => $this->sessionLifetime,
+                'path' => '/',
+                'domain' => $_SERVER['HTTP_HOST'] ?? '',
+                'secure' => $this->security->isHTTPS(),
+                'httponly' => true,
+                'samesite' => 'Strict'
+            ]);
+        }
     }
 
     /**
@@ -288,7 +291,9 @@ class Session {
      */
     public function extendLifetime($additionalSeconds = 3600) {
         $this->sessionLifetime += $additionalSeconds;
-        ini_set('session.gc_maxlifetime', $this->sessionLifetime);
+        if (session_status() === PHP_SESSION_NONE) {
+            ini_set('session.gc_maxlifetime', $this->sessionLifetime);
+        }
     }
 
     /**

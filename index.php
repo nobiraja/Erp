@@ -85,12 +85,8 @@ $router = Router::getInstance();
 
 // Load routes
 $routesFile = APP_PATH . '/routes.php';
-echo "Routes file: $routesFile\n";
-echo "File exists: " . (file_exists($routesFile) ? 'yes' : 'no') . "\n";
 if (file_exists($routesFile)) {
-    echo "Loading routes...\n";
     require_once $routesFile;
-    echo "Routes loaded\n";
 } else {
     // Default routes if no routes file exists
     $router->get('/', function() {
